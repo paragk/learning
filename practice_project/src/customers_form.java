@@ -164,6 +164,7 @@ public class customers_form extends JFrame {
 				String sql = "DELETE FROM customers_data WHERE customer_id = " + textField_3.getText();
 				statement =  con.prepareStatement(sql);
 				statement.executeUpdate(sql);
+				JOptionPane.showMessageDialog(null, "Record Deleted.");
 				}catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -262,7 +263,7 @@ public class customers_form extends JFrame {
 				//creating a variable to execute query
 				result= statement.executeQuery();
 				
-				while(result.next())
+			/*	while(result.next())
 				{
 					//System.out.println("Id = " + result.getString("customer_id") + " FirstName : " + result.getString(2) + " LastName : " + result.getString(3) + " Amount : " + result.getString(4));
 					textField.setText(result.getString(2));
@@ -271,8 +272,21 @@ public class customers_form extends JFrame {
 					id=Integer.parseInt(result.getString(1));
 					System.out.println(id);
 					textField_3.setText("   "+id);
+				}*/
+				if ( result.next( ) ) {
+					textField.setText(result.getString(2));
+					textField_1.setText(result.getString(3));
+					textField_2.setText(result.getString(4));
+					id=Integer.parseInt(result.getString(1));
+					System.out.println(id);
+					textField_3.setText("   "+id);
+
 				}
+				else {
+				result.previous( );
 				
+				JOptionPane.showMessageDialog(null, "End of File");
+				}
 				}catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -323,6 +337,66 @@ public class customers_form extends JFrame {
 		textField_3.setBounds(246, 124, 45, 20);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
+		
+		JButton button_2 = new JButton("||<");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+	
+					statement =  con.prepareStatement("Select * from customers_data where customer_id=1");
+				
+				//creating a variable to execute query
+				result= statement.executeQuery();
+				
+				while(result.next())
+				{
+					//System.out.println("Id = " + result.getString("customer_id") + " FirstName : " + result.getString(2) + " LastName : " + result.getString(3) + " Amount : " + result.getString(4));
+					textField.setText(result.getString(2));
+					textField_1.setText(result.getString(3));
+					textField_2.setText(result.getString(4));
+					id=Integer.parseInt(result.getString(1));
+					System.out.println(id);
+					textField_3.setText("   "+id);
+					JOptionPane.showMessageDialog(null, "First Record.");
+				}
+				
+				}catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+				
+		});
+		button_2.setBounds(67, 121, 51, 23);
+		contentPane.add(button_2);
+		
+		JButton button_3 = new JButton(">||");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					
+					statement =  con.prepareStatement("Select * from customers_data ");
+				
+				//creating a variable to execute query
+				result= statement.executeQuery();
+				
+				result.last();
+				textField.setText(result.getString(2));
+				textField_1.setText(result.getString(3));
+				textField_2.setText(result.getString(4));
+				id=Integer.parseInt(result.getString(1));
+				System.out.println(id);
+				textField_3.setText("   "+id);
+				JOptionPane.showMessageDialog(null, "last Record.");
+				}catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		button_3.setBounds(368, 121, 51, 23);
+		contentPane.add(button_3);
 	}
 
 	protected static void HIDE_ON_CLOSE() {
