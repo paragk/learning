@@ -153,6 +153,9 @@ public class customers_form extends JFrame {
 		btnUpdate.setToolTipText("Update Record");
 		btnUpdate.setBounds(246, 155, 78, 23);
 		contentPane.add(btnUpdate);
+		
+		// Updating record Button
+
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String fn=textField.getText();
