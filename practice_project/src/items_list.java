@@ -11,22 +11,12 @@ import java.awt.*;
 
 public class items_list extends JFrame {
 
-	//private JPanel contentPane;
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					items_list frame = new items_list();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	String price_per_kg;
+	String amount;
+	private JTextField textField_3;
 
 	/**
 	 * Create the frame.
@@ -88,6 +78,25 @@ public class items_list extends JFrame {
 		JLabel lblCalculatedAmount = new JLabel("Calculated Amount :");
 		lblCalculatedAmount.setBounds(161, 208, 120, 14);
 		getContentPane().add(lblCalculatedAmount);
+
+		JButton btnNewButton = new JButton("Calculate");
+		btnNewButton.addActionListener(new ActionListener() {
+		private JTextComponent formattedTextField;
+
+		public void actionPerformed(ActionEvent arg0) {
+				
+				//calculating the amount for the customer
+				price_per_kg = textField_1.getText();
+				System.out.println(price_per_kg);
+				amount = textField_2.getText();
+				System.out.println(amount);
+				
+				double cal=(Double.parseDouble(price_per_kg)*((Double.parseDouble(amount))/1000));
+				textField_3.setText("" + cal);   // Double.toString(cal)
+				System.out.println(cal);
+				
+			}
+		});
 		
 		JButton btnNewButton = new JButton("Calculate");
 		btnNewButton.setBounds(184, 244, 105, 23);
@@ -109,5 +118,14 @@ public class items_list extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);*/
+
+		//combo box selected item into textbox selected item
+		String selected_item = (String) comboBox.getSelectedItem();
+		textField.setText(selected_item);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(269, 205, 79, 20);
+		getContentPane().add(textField_3);
+		textField_3.setColumns(10);
 	}
 }
