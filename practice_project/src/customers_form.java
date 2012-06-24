@@ -153,6 +153,26 @@ public class customers_form extends JFrame {
 		btnUpdate.setToolTipText("Update Record");
 		btnUpdate.setBounds(246, 155, 78, 23);
 		contentPane.add(btnUpdate);
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String fn=textField.getText();
+				String ln=textField_1.getText();
+				String am=textField_2.getText();
+				String cid = textField_3.getText();
+				
+				try
+				{
+					stmt=con.createStatement();
+					stmt.executeUpdate("update customers_data set customer_firstname='"+ fn +"', customer_lastname='"+ ln +"',customer_amount='"+ am +"' where customer_id='"+ cid +"'");
+				JOptionPane.showMessageDialog(null, "Record Updated.");
+				}catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, "Error in Update.");
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		
 		JButton btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
