@@ -154,7 +154,7 @@ public class customers_form extends JFrame {
 		btnUpdate.setBounds(246, 155, 78, 23);
 		contentPane.add(btnUpdate);
 		
-		// Updating record Button
+		// Update function button 
 
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
