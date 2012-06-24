@@ -204,9 +204,8 @@ public class customers_form extends JFrame {
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				//items_list_and_price.
-				//customers_form=pp;
-				//il.setVisible(true);
+				items_list il=new items_list();
+				il.setVisible(true);
 				frame.setVisible(false);
 				
 				
