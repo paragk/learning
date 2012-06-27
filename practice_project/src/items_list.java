@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -7,6 +8,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.JTextComponent;
 import javax.swing.*;
+
+import com.lowagie.text.Cell;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.PageSize;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Table;
+import com.lowagie.text.pdf.PdfWriter;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,12 +29,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.StringTokenizer;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
  
 
 
@@ -35,6 +49,7 @@ public class items_list extends JFrame {
 	Double amount;
 	String c1,c2,c3,c4,c5,c6,c7,c8,c9,c10;
 	int count=1;
+	static int no=0;
 	private JTextField textField_3;
 	private JTextField textField;
 	private JTextField textField_4;
@@ -65,8 +80,49 @@ public class items_list extends JFrame {
 	private JTextField textField_29;
 	private JTextField textField_30;
 	private JTextField textField_31;
-
-		
+	String s1;
+	Double updateAmount;
+	String name1;
+	 static String br1c1;
+	 static String br1c2;
+	 static String br1c3;
+	 static String br1c4;
+	 static String br2c2;
+	 static String br2c3;
+	 static String br2c4;
+	 static String br2c1;
+	 static String br3c1;
+	 static String br3c2;
+	 static String br3c3;
+	 static String br3c4;
+	 static String br4c1;
+	 static String br4c2;
+	 static String br4c3;
+	 static String br4c4;
+	 static String br5c1;
+	 static String br5c2;
+	 static String br5c3;
+	 static String br5c4;
+	 static String br6c1;
+	 static String br6c2;
+	 static String br6c3;
+	 static String br6c4;
+	 static String br7c1;
+	 static String br7c2;
+	 static String br7c3;
+	 static String br7c4;
+	 static String br8c1;
+	 static String br8c2;
+	 static String br8c3;
+	 static String br8c4;
+	 static String br9c1;
+	 static String br9c2;
+	 static String br9c3;
+	 static String br9c4;
+	 static String br10c1;
+	 static String br10c2;
+	 static String br10c3;
+	 static String br10c4;
 	
 	/**
 	 * @throws SQLException 
@@ -88,7 +144,7 @@ public class items_list extends JFrame {
 				
 				//creating a variable to execute query
 				ResultSet result= statement.executeQuery();
-			
+	
 				while(result.next())
 				{
 					String s = result.getString(2) + " " + result.getString(3);
@@ -124,8 +180,18 @@ public class items_list extends JFrame {
 		}
 		
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		final JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox_2 = new JComboBox();
+		final JComboBox comboBox_3 = new JComboBox();
+		final JComboBox comboBox_4 = new JComboBox();
+		final JComboBox comboBox_5 = new JComboBox();
+		final JComboBox comboBox_6 = new JComboBox();
+		final JComboBox comboBox_7 = new JComboBox();
+		final JComboBox comboBox_8 = new JComboBox();
+		final JComboBox comboBox_9 = new JComboBox();
+		final JComboBox comboBox_10 = new JComboBox();
+		
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox.setBounds(102, 47, 79, 20);
 		getContentPane().add(comboBox);
 		
@@ -133,38 +199,6 @@ public class items_list extends JFrame {
 		lblCustomerName.setBounds(10, 11, 105, 14);
 		getContentPane().add(lblCustomerName);
 		
-		
-		/*comboBox_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				//creating a variable for the connection
-				if(count==1)
-				{
-				try {
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practice_db","root","parag123");
-				PreparedStatement statement =  con.prepareStatement("Select * from customers_data ");
-				
-				//creating a variable to execute query
-				ResultSet result= statement.executeQuery();
-			
-				while(result.next())
-				{
-					String s = result.getString(2);// + " " + result.getString(3);
-				    comboBox_1.addItem(s);
-					//System.out.println("Id = " + result.getString(1) + " FirstName : " + result.getString(2) + " LastName : " + result.getString(3) + " Amount : " + result.getString(4));
-				}
-				} catch (SQLException ex) {
-					// TODO Auto-generated catch block
-					ex.printStackTrace();
-					System.out.println("Connection con");
-				}
-				count++;
-				}
-				else
-				{
-				}
-				}
-		});*/
 		comboBox_1.setBounds(125, 8, 155, 20);
 		getContentPane().add(comboBox_1);
 		
@@ -287,21 +321,81 @@ public class items_list extends JFrame {
 		btnNewButton.setBounds(536, 276, 105, 35);
 		getContentPane().add(btnNewButton);
 		
+		
+		
+		
 		JButton btnUpdateRecord = new JButton("Update Record");
+		
 		btnUpdateRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//*-----------------------------------------------------------------*
-				String name = (String) comboBox_1.getSelectedItem();
-				Double a = Double.parseDouble(customers_form.textField_2.getText());
-				System.out.println(a);
-				Double updateAmount = a + amount;
-				System.out.println(updateAmount);
 				try
 				{
+			
+					name1 = (String) comboBox_1.getSelectedItem();
+					String name;
+					StringTokenizer command = new StringTokenizer(name1," ");
+					name=command.nextToken();
+					System.out.println(name);
+					
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practice_db","root","parag123");
+					String strn = "Select customer_amount from customers_data where customer_firstname= '" + name  + "'";
+					PreparedStatement statement =  con.prepareStatement(strn);
+					
+					//creating a variable to execute query
+					ResultSet result= statement.executeQuery(strn);
+					
+					while(result.next())
+					{
+						Double a = Double.parseDouble(result.getString("customer_amount"));
+						System.out.println("" + a);
+						updateAmount = a + amount;
+						System.out.println(updateAmount);
+					}
+					
 					Statement stmt=con.createStatement();
 					stmt.executeUpdate("update customers_data set customer_amount='"+ updateAmount.toString() +"' where customer_firstname='"+ name +"'");
 				JOptionPane.showMessageDialog(null, "Record Updated.");
+				br1c1 = (String) comboBox.getSelectedItem();
+				br1c2 = textField_1.getText();
+				br1c3 = textField_2.getText();
+				br1c4 = textField_3.getText();
+				br2c2 = textField.getText();
+				br2c3 = textField_13.getText();
+				br2c4 = textField_22.getText();
+				br2c1= (String) comboBox_2.getSelectedItem();
+				br3c2 = textField_5.getText();
+				br3c3 = textField_14.getText();
+				br3c4 = textField_23.getText();
+				br3c1= (String) comboBox_3.getSelectedItem();
+				br4c2 = textField_6.getText();
+				br4c3 = textField_15.getText();
+				br4c4 = textField_24.getText();
+				br4c1= (String) comboBox_4.getSelectedItem();
+				br5c2 = textField_7.getText();
+				br5c3 = textField_14.getText();
+				br5c4 = textField_25.getText();
+				br5c1= (String) comboBox_5.getSelectedItem();
+				br6c2 = textField_8.getText();
+				br6c3 = textField_17.getText();
+				br6c4 = textField_26.getText();
+				br6c1= (String) comboBox_6.getSelectedItem();
+				br7c2 = textField_9.getText();
+				br7c3 = textField_18.getText();
+				br7c4 = textField_27.getText();
+				br7c1= (String) comboBox_7.getSelectedItem();
+				br8c2 = textField_10.getText();
+				br8c3 = textField_19.getText();
+				br8c4 = textField_28.getText();
+				br8c1= (String) comboBox_8.getSelectedItem();
+				br9c2 = textField_11.getText();
+				br9c3 = textField_20.getText();
+				br9c4 = textField_29.getText();
+				br9c1= (String) comboBox_9.getSelectedItem();
+				br10c2 = textField_12.getText();
+				br10c3 = textField_21.getText();
+				br10c4 = textField_30.getText();
+				br10c1= (String) comboBox_10.getSelectedItem();
 				}catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, "Error in Update.");
@@ -321,7 +415,7 @@ public class items_list extends JFrame {
 		setContentPane(contentPane);*/
 		
 		//combo box selected item into textbox selected item
-		String selected_item = (String) comboBox.getSelectedItem();
+	//	String selected_item = (String) comboBox.getSelectedItem();
 		
 		textField_3 = new JTextField();
 		textField_3.addMouseListener(new MouseAdapter() {
@@ -335,48 +429,40 @@ public class items_list extends JFrame {
 		getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_2.setBounds(102, 69, 79, 20);
 		getContentPane().add(comboBox_2);
 		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_3.setBounds(102, 91, 79, 20);
-		getContentPane().add(comboBox_3);
+		getContentPane().add(comboBox_3);	
 		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_4.setBounds(102, 114, 79, 20);
 		getContentPane().add(comboBox_4);
 		
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		comboBox_5.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_5.setBounds(102, 137, 79, 20);
 		getContentPane().add(comboBox_5);
 		
-		JComboBox comboBox_6 = new JComboBox();
-		comboBox_6.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		comboBox_6.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_6.setBounds(102, 160, 79, 20);
 		getContentPane().add(comboBox_6);
 		
-		JComboBox comboBox_7 = new JComboBox();
-		comboBox_7.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		comboBox_7.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_7.setBounds(102, 183, 79, 20);
 		getContentPane().add(comboBox_7);
 		
-		JComboBox comboBox_8 = new JComboBox();
-		comboBox_8.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		comboBox_8.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_8.setBounds(102, 206, 79, 20);
 		getContentPane().add(comboBox_8);
 		
-		JComboBox comboBox_9 = new JComboBox();
-		comboBox_9.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		comboBox_9.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_9.setBounds(102, 228, 79, 20);
 		getContentPane().add(comboBox_9);
 		
-		JComboBox comboBox_10 = new JComboBox();
-		comboBox_10.setModel(new DefaultComboBoxModel(new String[] {"Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
+		comboBox_10.setModel(new DefaultComboBoxModel(new String[] {"-------------", "Daal", "Rajma", "Sugar", "Salt", "Surf", "Soap", "Shampoo"}));
 		comboBox_10.setBounds(102, 251, 79, 20);
 		getContentPane().add(comboBox_10);
 		
@@ -917,7 +1003,116 @@ public class items_list extends JFrame {
 		lblNewLabel_10.setBounds(744, 286, 46, 14);
 		getContentPane().add(lblNewLabel_10);
 		
-		JButton btnPrint = new JButton("Print");
+		
+		JButton btnPrint = new JButton("Print Bill");
+		btnPrint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//*------------------------------------------------------------------*
+				//try
+				//{
+			//	Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+				try {
+					  no ++ ;
+					  String bill="Bill_No." + no +".pdf";
+					  Document document=new Document();
+				      PdfWriter.getInstance(document,new FileOutputStream(bill));
+				      document.open();  
+				      String customer_name = "Customer's Name : " + name1;
+				      document.add(new Paragraph("Customer's Bill",FontFactory.getFont(FontFactory.COURIER, 14, Font.BOLD, new Color(0,0,0))));
+				      document.add(new Paragraph(customer_name,FontFactory.getFont(FontFactory.COURIER, 11, Font.BOLD, new Color(0,0,0))));
+				      
+				      Table t = new Table(4,10);
+
+				      t.setBorderColor(new Color(0,0,0));
+
+				      t.setPadding(5);
+
+				      //t.setSpacing(5);
+
+				      t.setBorderWidth(1);
+
+				      Cell c1 = new Cell("Selected Item");
+
+				      c1.setHeader(true);
+
+				      t.addCell(c1);
+
+				      c1 = new Cell("Amount per Kg");
+
+				      t.addCell(c1);
+
+				      c1 = new Cell("Quantity");
+
+				      t.addCell(c1);
+				      
+				      c1= new Cell("Amount");
+				      
+				      t.addCell(c1);
+				      t.endHeaders();
+				      
+				      t.addCell(br1c1);
+				      t.addCell(br1c2);
+				      t.addCell(br1c3);
+				      t.addCell(br1c4);
+				      t.addCell(br2c1);
+				      t.addCell(br2c2);
+				      t.addCell(br2c3);
+				      t.addCell(br2c4);
+				      t.addCell(br3c1);
+				      t.addCell(br3c2);
+				      t.addCell(br3c3);
+				      t.addCell(br3c4);
+				      t.addCell(br4c1);
+				      t.addCell(br4c2);
+				      t.addCell(br4c3);
+				      t.addCell(br4c4);
+				      t.addCell(br5c1);
+				      t.addCell(br5c2);
+				      t.addCell(br5c3);
+				      t.addCell(br5c4);
+				      t.addCell(br6c1);
+				      t.addCell(br6c2);
+				      t.addCell(br6c3);
+				      t.addCell(br6c4);
+				      t.addCell(br7c1);
+				      t.addCell(br7c2);
+				      t.addCell(br7c3);
+				      t.addCell(br7c4);
+				      t.addCell(br8c1);
+				      t.addCell(br8c2);
+				      t.addCell(br8c3);
+				      t.addCell(br8c4);
+				      t.addCell(br9c1);
+				      t.addCell(br9c2);
+				      t.addCell(br9c3);
+				      t.addCell(br9c4);
+				      t.addCell(br10c1);
+				      t.addCell(br10c2);
+				      t.addCell(br10c3);
+				      t.addCell(br10c4);
+
+					document.add(t);
+					 String total = "                                                                                                                                                  Total : Rs." + amount + "/-";
+					 String remainingtotal = "                                                                                                                                    Remaining Amount : Rs. " + updateAmount + "/-";
+					 
+				      document.add(new Paragraph(total,FontFactory.getFont(FontFactory.COURIER, 16, Font.BOLD, new Color(255,0,0))));
+				      document.add(new Paragraph(remainingtotal,FontFactory.getFont(FontFactory.COURIER, 16, Font.BOLD, new Color(0,0,255))));
+				      
+				      document.close();
+					JOptionPane.showMessageDialog(null, "pdf generated " + bill);
+					System.out.println("pdf generated");
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("pdf not generated");
+				} catch (DocumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("pdf not generated");
+				}		
+				
+			}
+		});
 		btnPrint.setBounds(301, 282, 89, 23);
 		getContentPane().add(btnPrint);
 			
